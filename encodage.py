@@ -8,12 +8,13 @@ fileMessage = input('Adresse du fichier texte (.txt):')
 
 f = open('txts/'+ fileMessage + '.txt')
 message = f.read()
-if len(message) == 0:
-    raise Exception("Le fichier .txt est vide")
+
 f.close()
 
 if len(message) >= 2**15:
     raise Exception("Taille de message trop grande (>32767 symboles)")
+elif len(message) == 0:
+    raise Exception("Le fichier .txt est vide")
 
 filePic = input("Adresse du l' image initiale (.png):")
 img = PIL.Image.open('pngs/'+ filePic + '.png')
