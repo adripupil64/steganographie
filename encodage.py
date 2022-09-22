@@ -28,7 +28,7 @@ if 3*largeur*hauteur <= len(message)*8:
 binLetters = []
 for letter in message:
     binCode = bin(ord(letter))
-    binCode = binCode[:2] + (10 - len(binCode)) * '0' + binCode[2:] #Ajout de 0s pour normaliser la longeur de chaque element à 10
+    binCode = binCode[:2] + (10 - len(binCode)) * '0' + binCode[2:] #Ajout de 0s pour normaliser la longeur de chaque element à 10 (0b inclus)
 
     binLetters.append((binCode))
 
