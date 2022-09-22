@@ -43,7 +43,7 @@ binLetters = []
 letter = ''
 
 
-for i in range(length*8): #On commence le decodage à l'indice 15
+for i in range(length*8): 
     if len(letter) == 8:
         binLetters.append(chr(int(letter, 2)))
         letter = ""

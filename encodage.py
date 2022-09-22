@@ -23,6 +23,7 @@ largeur, hauteur = img.size
 if 3*largeur*hauteur <= len(message)*8:
     raise Exception ("Resolution de photo insuffisante pour la taille du texte")
 
+
 ### Encodage en Unicode des lettres ###
 binLetters = []
 for letter in message:
@@ -46,6 +47,8 @@ for y in range(hauteur):
         for i in range(3):
             binPixels.append(bin(rvb[i]))
     nbPixelsRestants -= largeur
+    if nbPixelsRestants < 0:
+        break
 
 
 
@@ -53,7 +56,7 @@ for y in range(hauteur):
 ### Encodage de la longeur du message ###
 newBinPixels = []
 binLength = bin(len(message))[2:]
-binLength = (15-len(binLength))* '0' + binLength #Ajout de 0s pour que binLength soit de taille 0
+binLength = (15-len(binLength))* '0' + binLength #Ajout de 0s pour que binLength soit de taille 15 (0b compris)
 
 for i in range(15):
     newBinPixels.append(binPixels[i][:-1] + binLength[i]) #Encodage de la taille du message dans les codes RVB des 5 premiers pixels
@@ -68,27 +71,36 @@ posInBinPixels = 15 #On commence l'encodage à l'indice 15 (6eme pixel)
 for elt in binLetters:
     for i in range(2, len(elt)):
         originalVal = binPixels[posInBinPixels]
-        encodedVal = originalVal[:-1] + elt[i] #Le bit de pois faible (dernier element de la chaine) est remplace par les valeurs de chaque element de binLetters (elt)
+        encodedVal = originalVal[:-1] + elt[i] #Le bit de pois faible (dernier element de la chaine) est remplace par les valeurs de chaque element de la lettre binLetters (elt)
         newBinPixels.append(encodedVal)
 
 
         posInBinPixels += 1
 
-###Insertion des nouvelles valeurs des pixels ###
-mergedBinPixels = newBinPixels + binPixels[len(newBinPixels):]
-j = 0
+posInNewBinPixels = 0
 exit = False
 for y in range(hauteur):
     for x in range(largeur):
-        if j>=len(newBinPixels):
-            exit = True
+        rvb = img.getpixel((x, y))
+        newRvb = []
+        for i in range(3):
+            if posInNewBinPixels < len(newBinPixels):
+                newRvb.append(int(newBinPixels[posInNewBinPixels], 2))
+                posInNewBinPixels += 1
+            else:
+                exit = True
+                break
+        if exit:
             break
-            
-        r, v, b = int(mergedBinPixels[j], 2), int(mergedBinPixels[j+1], 2), int(mergedBinPixels[j+2], 2)
-        j += 3
-        img.putpixel((x, y), (r, v, b))
+        tupleRvb = tuple(newRvb)
+        if len(tupleRvb) == 3:
+            img.putpixel((x, y), tupleRvb)
     if exit:
         break
+
+
+            
+    
 
 
 
