@@ -43,7 +43,7 @@ binLetters = []
 letter = ''
 
 
-for i in range(length*8): 
+for i in range(length*8): # = len(binPixels)
     if len(letter) == 8:
         binLetters.append(chr(int(letter, 2)))
         letter = ""
