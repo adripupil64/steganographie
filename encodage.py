@@ -114,7 +114,7 @@ for y in range(hauteur):
 img.save('out.png')
 img.close()
 
-print(f"Le message a été encodé dans l'image out.png avec succes")
+print("Le message a été encodé dans l'image out.png avec succes")
 img = PIL.Image.open('out.png')
 
 img.show()
