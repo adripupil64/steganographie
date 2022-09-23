@@ -89,12 +89,10 @@ for y in range(hauteur):
                 posInNewBinPixels += 1
             else:
                 exit = True
-                break
+                newRvb.append(rvb[i])
         if exit:
             break
-        tupleRvb = tuple(newRvb)
-        if len(tupleRvb) == 3:
-            img.putpixel((x, y), tupleRvb)
+        img.putpixel((x, y), tuple(newRvb))
     if exit:
         break
 
