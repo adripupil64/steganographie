@@ -88,7 +88,8 @@ for y in range(hauteur):
                 newRvb.append(int(newBinPixels[posInNewBinPixels], 2))
                 posInNewBinPixels += 1
             else:
-                exit = True
+                if not exit:
+                    exit = True
                 newRvb.append(rvb[i])
         img.putpixel((x, y), tuple(newRvb))
         if exit:
