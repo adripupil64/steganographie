@@ -90,9 +90,9 @@ for y in range(hauteur):
             else:
                 exit = True
                 newRvb.append(rvb[i])
+        img.putpixel((x, y), tuple(newRvb))
         if exit:
             break
-        img.putpixel((x, y), tuple(newRvb))
     if exit:
         break
 
