@@ -3,7 +3,7 @@ import PIL.Image
 ### Entree et verification de l'image et du message ###
 #fileMessage = 'message'
 #filePic = 'white'
-fileMessage = input('Adresse du fichier texte (.txt):')
+fileMessage = input('Nom du fichier texte (.txt):')
 
 
 f = open('txts/'+ fileMessage + '.txt')
@@ -16,7 +16,7 @@ if len(message) >= 2**15:
 elif len(message) == 0:
     raise Exception("Le fichier .txt est vide")
 
-filePic = input("Adresse du l' image initiale (.png):")
+filePic = input("Nom de l' image initiale (.png):")
 img = PIL.Image.open('pngs/'+ filePic + '.png')
 largeur, hauteur = img.size
 
@@ -108,13 +108,13 @@ for y in range(hauteur):
 
 
 
-
+fileOut = input("Nom du fichier de sortie: ")
 
 ### Sauvegarde de la nouvelle image et affichage de celle-ci ###
-img.save('out.png')
+img.save(fileOut + '.png')
 img.close()
 
 print("Le message a été encodé dans l'image out.png avec succes")
-img = PIL.Image.open('out.png')
+img = PIL.Image.open(fileOut + '.png')
 
 img.show()

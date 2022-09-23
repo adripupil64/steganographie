@@ -1,7 +1,7 @@
 import PIL.Image
 
 #Entree de l'image et recuperation de la hauteur et de la largeur
-filePic = 'out' #Adresse a modifier en cas de changement de nom de photo de sortir out du deplacement de celui-ci
+filePic = input("Nom du fichier a décoder: ") #Adresse a modifier en cas de deplacement de de la photo de sortie
 
 
 
