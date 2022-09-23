@@ -113,7 +113,7 @@ fileOut = input("Nom du fichier de sortie: ")
 img.save(fileOut + '.png')
 img.close()
 
-print("Le message a été encodé dans l'image out.png avec succes")
+print(f"Le message a été encodé dans l'image {fileOut}.png avec succes")
 img = PIL.Image.open(fileOut + '.png')
 
 img.show()
